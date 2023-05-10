@@ -1,8 +1,10 @@
-package com.example.demo;
+package com.study.trip;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+@EnableJpaAuditing
 @SpringBootApplication
 public class TripToLeaveApplication {
 
