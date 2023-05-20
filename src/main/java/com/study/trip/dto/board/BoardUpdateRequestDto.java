@@ -13,4 +13,7 @@ public class BoardUpdateRequestDto {
 
 	private String title;
 	private String content;
+	private String startday;
+	private String lastday;
+	private int pnum;
 }

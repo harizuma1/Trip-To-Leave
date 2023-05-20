@@ -10,6 +10,17 @@
   <div class="container border rounded flex-md-row mb-4 shadow-sm h-md-250">
     <form>
       <h1 class="h3 m-3 fw-normal">글수정</h1>
+      <div>
+        여행날짜 :
+        <input type="date" id="startday" th:value="${board.startday}">
+        -
+        <input type="date" id="lastday" th:value="${board.lastday}">
+      </div>
+
+      <div>
+        인원수 :
+        <input type="number" id="pnum" th:value="${board.pnum}">
+      </div>
       <input type="hidden" id="id" th:value="${board.id}">
       <div class="form-floating m-3">
         <input type="text" th:value="${board.title}" class="form-control" id="title" placeholder="제목을 입력하세요." required>

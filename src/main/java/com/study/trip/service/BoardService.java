@@ -58,7 +58,7 @@ public class BoardService {
 	public Long update(Long id, BoardUpdateRequestDto boardUpdateRequestDto) {
 		Board board = boardRepository.findById(id)
 			.orElseThrow(() -> new IllegalArgumentException("해당 id가 없습니다. id=" + id));
-		board.update(boardUpdateRequestDto.getTitle(), boardUpdateRequestDto.getContent());
+		board.update(boardUpdateRequestDto.getTitle(), boardUpdateRequestDto.getContent(), boardUpdateRequestDto.getStartday(), boardUpdateRequestDto.getLastday(), boardUpdateRequestDto.getPnum());
 		return id;
 	}
 

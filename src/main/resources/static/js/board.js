@@ -16,7 +16,10 @@ let index = {
     save: function () {
         let data = {
             title: $("#title").val(),
-            content: $("#content").val()
+            content: $("#content").val(),
+            startday: $("#startday").val(),
+            lastday: $("#lastday").val(),
+            pnum: $("#pnum").val()
         }
 
         $.ajax({
@@ -53,7 +56,10 @@ let index = {
 
         let data = {
             title: $("#title").val(),
-            content: $("#content").val()
+            content: $("#content").val(),
+            startday: $("#startday").val(),
+            lastday: $("#lastday").val(),
+            pnum: $("#pnum").val()
         }
         console.log(id);
         console.log(data);

@@ -18,6 +18,9 @@ public class BoardSaveRequestDto {
 	private String content;
 	private int count;
 	private User user;
+	private String startday;
+	private String lastday;
+	private int pnum;
 
 	public Board toEntity() {
 		return Board.builder()
@@ -25,6 +28,9 @@ public class BoardSaveRequestDto {
 			.content(content)
 			.count(0)
 			.user(user)
+			.startday(startday)
+			.lastday(lastday)
+			.pnum(pnum)
 			.build();
 	}
 
