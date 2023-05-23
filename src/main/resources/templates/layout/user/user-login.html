@@ -8,7 +8,7 @@
 
 <main class="form-signin">
   <div class="container border rounded flex-md-row mb-4 shadow-sm h-md-250">
-    <form action="/auth/user/login" method="post">
+    <form action="/auth/api/v1/user/login" method="post">
       <h1 class="h3 m-3 fw-normal">로그인</h1>
       <div th:if="${param.error}" class="alert alert-danger" role="alert">
         아이디 혹은 비밀번호가 잘못 입력되었습니다.
@@ -17,11 +17,11 @@
         로그아웃이 완료되었습니다.
       </div>
       <div class="form-floating m-3">
-        <input type="text" name="username" class="form-control" id="username" placeholder="아이디를 입력하세요." required="required">
+        <input type="text" name="username" class="form-control" id="username" placeholder="아이디를 입력하세요." required>
         <label for="username">아이디</label>
       </div>
       <div class="form-floating m-3">
-        <input type="password" name="password" class="form-control" id="password" placeholder="패스워드를 입력하세요." required="required">
+        <input type="password" name="password" class="form-control" id="password" placeholder="패스워드를 입력하세요." required>
         <label for="password">패스워드</label>
       </div>
       <div class="checkbox mb-3">
@@ -30,7 +30,12 @@
       </div>
       <button class="w-100 btn btn-lg btn-success" id="btn-login">로그인</button>
     </form>
-
+    <div class="border rounded fw-normal h3" style="margin: 20px 0; padding: 30px;">
+      <span>소셜 로그인</span>
+            <div style="margin-top: 20px;">
+                <a href="/oauth2/authorization/google" class="btn btn-secondary" role="button">구글</a>
+            </div>
+    </div>
   </div>
 </main>
 

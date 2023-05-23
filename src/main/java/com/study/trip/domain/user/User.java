@@ -28,7 +28,7 @@ public class User extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; //sequence, auto_increment
 
-	@Column(nullable = false, length = 20, unique = true)
+	@Column(nullable = false, length = 50, unique = true)
 	private String username; //아이디
 
 	@Column(nullable = false, length = 100)

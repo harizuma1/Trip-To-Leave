@@ -41,6 +41,7 @@ public class Board extends BaseTimeEntity {
 	@Lob
 	private String content;
 
+	@Column
 	private int count; //조회수
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -57,9 +58,7 @@ public class Board extends BaseTimeEntity {
 		this.lastday = lastday;
 		this.pnum = punm;
 	}
-
-
-
+	
 	@OrderBy("id desc")
 	@JsonIgnoreProperties({"board"})
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)

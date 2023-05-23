@@ -34,6 +34,7 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test:5.7.3'
 	runtimeOnly 'org.webjars:bootstrap:5.2.3'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 }
 

@@ -1,7 +1,5 @@
 package com.study.trip.controller;
 
-
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +34,5 @@ public class UserController {
 		model.addAttribute("principal", principalDetail.getUser());
 		return "layout/user/user-update";
 	}
-
 
 }
