@@ -1,4 +1,6 @@
 package com.study.trip.config.oauth;
+
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -10,6 +12,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.study.trip.config.auth.PrincipalDetail;
+import com.study.trip.config.oauth.provider.GoogleUserInfo;
+import com.study.trip.config.oauth.provider.NaverUserInfo;
+import com.study.trip.config.oauth.provider.OAuth2UserInfo;
 import com.study.trip.domain.user.Role;
 import com.study.trip.domain.user.User;
 import com.study.trip.domain.user.UserRepository;
@@ -26,35 +31,39 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 		OAuth2User oAuth2User = super.loadUser(userRequest);
+		return processOAuth2User(userRequest, oAuth2User);
+	}
 
-		String provider = userRequest.getClientRegistration().getRegistrationId(); //google
-		String providerId = oAuth2User.getAttribute("sub");
-		String username = provider + "_" + providerId;
-		String password = UUID.randomUUID().toString();
-		String email = oAuth2User.getAttribute("email");
-		String nickname = "소셜 로그인";
-		Role role = Role.USER;
+	private OAuth2User processOAuth2User(OAuth2UserRequest userRequest, OAuth2User oAuth2User) {
+		OAuth2UserInfo oAuth2UserInfo = null;
 
-		Optional<User> userEntity = userRepository.findByUsername(username);
-
-		User user;
-		if (userEntity.isPresent()) {
-			user = userEntity.get();
-		} else {
-			user = User.builder()
-				.username(username)
-				.password(password)
-				.email(email)
-				.nickname(nickname)
-				.role(role)
-				.provider(provider)
-				.providerId(providerId)
-				.build();
-
-			userRepository.save(user);
-
+		if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
+			oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+		} else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
+			oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
 		}
 
+		Optional<User> userOptional = userRepository.findByProviderAndProviderId(oAuth2UserInfo.getProvider(),
+			oAuth2UserInfo.getProviderId());
+
+		User user;
+
+		if (userOptional.isPresent()) {
+			user = userOptional.get();
+			user.setEmail(oAuth2UserInfo.getEmail());
+			userRepository.save(user);
+		} else {
+			user = User.builder()
+				.username(oAuth2UserInfo.getProvider() + "_" + oAuth2UserInfo.getProviderId())
+				.password(UUID.randomUUID().toString())
+				.email(oAuth2UserInfo.getEmail())
+				.nickname("소셜로그인")
+				.role(Role.USER)
+				.provider(oAuth2UserInfo.getProvider())
+				.providerId(oAuth2UserInfo.getProviderId())
+				.build();
+			userRepository.save(user);
+		}
 		return new PrincipalDetail(user, oAuth2User.getAttributes());
 	}
 }
