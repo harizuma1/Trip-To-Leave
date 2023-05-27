@@ -11,19 +11,58 @@
 
   <div class="container border rounded flex-md-row mb-4 shadow-sm h-md-250">
     <form>
+      <div class="search_boxes">
+        <div class="form-floating m-3">
+          시/도 선택:
+          <select name="city" id="city" onchange="categoryChange(this)">
+            <option value>시/도 선택</option>
+            <option value="강원">강원</option>
+            <option value="경기">경기</option>
+            <option value="경남">경남</option>
+            <option value="경북">경북</option>
+            <option value="광주">광주</option>
+            <option value="대구">대구</option>
+            <option value="대전">대전</option>
+            <option value="부산">부산</option>
+            <option value="서울">서울</option>
+            <option value="울산">울산</option>
+            <option value="인천">인천</option>
+            <option value="전남">전남</option>
+            <option value="전북">전북</option>
+            <option value="제주">제주</option>
+            <option value="충남">충남</option>
+            <option value="충북">충북</option>
+          </select>
+        </div>
 
+
+        <div class="form-floating m-3">
+          군/구 선택 :
+          <select name="state" id="state">
+            <option>군/구 선택</option>
+          </select>
+        </div>
+      </div>
+      </hr>
       <div class="form-floating m-3">
-        여행날짜 :
+        여행날짜
         <input type="date" name="startday" id="startday">
         -
         <input type="date" name="lastday" id="lastday">
       </div>
 
       <div class="form-floating m-3">
-        인원수 :
-        <input type="number" name="pnum" id="pnum" placeholder="인원수를 입력하세요." required>
-        <label for="pnum">제목</label>
+        모집 인원
+
+        1<input type="range" name="pnum" id="pnum"  min="1" max="10" value="1">10
+        <span id="value1" value="1"></span>명
+
       </div>
+      <div class="form-floating m-3">
+        사진 등록:
+        <input type="file" name="picture" id="picture">
+      </div>
+      </hr>
 
       <div class="form-floating m-3">
         <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요." required>
@@ -48,6 +87,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script th:src="@{/js/board.js}"></script>
+<script>
+  var slider = document.getElementById("pnum");
+  var output = document.getElementById("value1");
+  output.innerHTML=slider.value;
+
+  slider.oninput=function(){
+    output.innerHTML = this.value;
+  }
+</script>
 </body>
 
 </html>

@@ -16,4 +16,7 @@ public class BoardUpdateRequestDto {
 	private String startday;
 	private String lastday;
 	private int pnum;
+	private String city;
+
+	private String state;
 }
