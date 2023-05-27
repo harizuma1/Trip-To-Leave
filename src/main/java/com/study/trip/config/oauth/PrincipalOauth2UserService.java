@@ -1,5 +1,6 @@
 package com.study.trip.config.oauth;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -13,8 +14,11 @@ import org.springframework.stereotype.Service;
 
 import com.study.trip.config.auth.PrincipalDetail;
 import com.study.trip.config.oauth.provider.GoogleUserInfo;
+
+import com.study.trip.config.oauth.provider.KakaoUserInfo;
 import com.study.trip.config.oauth.provider.NaverUserInfo;
 import com.study.trip.config.oauth.provider.OAuth2UserInfo;
+import com.study.trip.domain.user.KakaoProfile;
 import com.study.trip.domain.user.Role;
 import com.study.trip.domain.user.User;
 import com.study.trip.domain.user.UserRepository;
@@ -36,11 +40,21 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 	private OAuth2User processOAuth2User(OAuth2UserRequest userRequest, OAuth2User oAuth2User) {
 		OAuth2UserInfo oAuth2UserInfo = null;
+		KakaoProfile kakaoProfile = new KakaoProfile();
 
 		if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
 			oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
 		} else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
 			oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
+		}
+		else if (userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("username", "kakao" + "_" + kakaoProfile.getId());
+			attributes.put("email", kakaoProfile.getKakao_account().getEmail());
+			attributes.put("provider", "kakao");
+			attributes.put("providerId", kakaoProfile.getId().toString());
+
+			oAuth2UserInfo = new KakaoUserInfo(attributes);
 		}
 
 		Optional<User> userOptional = userRepository.findByProviderAndProviderId(oAuth2UserInfo.getProvider(),

@@ -35,4 +35,11 @@ public class BoardController {
 		boardService.updateCount(id);
 		return "layout/board/board-detail";
 	}
+
+	@GetMapping("/user/mypage/mypost/{id}")
+	public String mydetail(@PathVariable Long id, Model model) {
+		model.addAttribute("board", boardService.detail(id));
+		boardService.updateCount(id);
+		return "layout/board/board-detail";
+	}
 }

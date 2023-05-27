@@ -70,4 +70,9 @@ public class BoardService {
 		return boardRepository.updateCount(id);
 	}
 
+	@Transactional
+	public Page<Board> findByUser_Id(Long userId, Pageable pageable) {
+		return boardRepository.findByUser_Id(userId, pageable);
+	}
+
 }

@@ -30,31 +30,31 @@ public class SecurityConfig {
 
 	@Bean
 	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-	throws Exception{
+		throws Exception{
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
-				.rememberMe().tokenValiditySeconds(60 * 60 * 7)
-				.userDetailsService(principalDetailService)
+			.rememberMe().tokenValiditySeconds(60 * 60 * 7)
+			.userDetailsService(principalDetailService)
 			.and()
-				.cors().and().csrf().disable()
-				.authorizeHttpRequests()
-				.requestMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll()
-				.anyRequest().authenticated()
+			.cors().and().csrf().disable()
+			.authorizeHttpRequests()
+			.requestMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll()
+			.anyRequest().authenticated()
 			.and()
-				.formLogin()
-				.loginPage("/auth/user/login")
-				.loginProcessingUrl("/auth/api/v1/user/login")
-				.defaultSuccessUrl("/")
+			.formLogin()
+			.loginPage("/auth/user/login")
+			.loginProcessingUrl("/auth/api/v1/user/login")
+			.defaultSuccessUrl("/")
 			.and()
-				.oauth2Login()
-				.loginPage("/auth/user/login")
-				.defaultSuccessUrl("/")			// 로그인 성공하면 "/" 으로 이동
+			.oauth2Login()
+			.loginPage("/auth/user/login")
+			.defaultSuccessUrl("/")			// 로그인 성공하면 "/" 으로 이동
 			.userInfoEndpoint()
-				.userService(principalOauth2UserService);
+			.userService(principalOauth2UserService);
 
 		return http.build();
 	}
