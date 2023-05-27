@@ -50,12 +50,18 @@ public class Board extends BaseTimeEntity {
 	private String lastday;
 	private int pnum;
 
-	public void update(String title, String content, String startday, String lastday, int punm) {
+	private String city;
+
+	private String state;
+
+	public void update(String title, String content, String startday, String lastday, int punm, String city, String state) {
 		this.title = title;
 		this.content = content;
 		this.startday = startday;
 		this.lastday = lastday;
 		this.pnum = punm;
+		this.city=city;
+		this.state= state;
 	}
 
 

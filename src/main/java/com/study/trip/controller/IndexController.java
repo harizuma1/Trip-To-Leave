@@ -24,7 +24,7 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String index(Model model,
-		@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+		@PageableDefault(size = 40, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
 		@RequestParam(required = false, defaultValue = "") String search) {
 		Page<Board> boards = boardService.findByTitleContainingOrContentContaining(search, search, pageable);
 		int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);

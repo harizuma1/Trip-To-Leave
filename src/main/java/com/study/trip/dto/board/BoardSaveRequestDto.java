@@ -22,6 +22,10 @@ public class BoardSaveRequestDto {
 	private String lastday;
 	private int pnum;
 
+	private String city;
+
+	private String state;
+
 	public Board toEntity() {
 		return Board.builder()
 			.title(title)
@@ -31,6 +35,8 @@ public class BoardSaveRequestDto {
 			.startday(startday)
 			.lastday(lastday)
 			.pnum(pnum)
+				.city(city)
+				.state(state)
 			.build();
 	}
 

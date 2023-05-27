@@ -26,24 +26,29 @@
     </tbody>
   </table>
   <div class="container border rounded flex-md-row mb-4 shadow-sm h-md-250">
-    <h1 class="h3 m-3 fw-normal">글상세</h1>
-    <hr/>
 
-    <div>
-      여행날짜 :
-      <h3 th:text="${board.startday}" style="margin-bottom: 50px;"></h3>
-      -
-      <h3 th:text="${board.lastday}" style="margin-bottom: 50px;"></h3>
-    </div>
 
-    <div>
-      인원수 :
-      <h3 th:text="${board.pnum}" style="margin-bottom: 50px;"></h3>
-    </div>
 
     <div class="form-floating m-3">
       <h3 th:text="${board.title}" style="margin-bottom: 50px;"></h3>
     </div>
+    <hr/>
+    <div class="form-floating m-3">
+
+      <a style="color:gray;">지역</a>
+      <a th:text="${board.city}" style="margin-bottom: 50px;"></a>
+      <a th:text="${board.state}" style="margin-bottom: 50px;"></a>
+      <a style="color:gray;"> 모집 인원</a>
+      <a th:text="${board.pnum}" style="margin-bottom: 50px;"></a>
+    </div>
+    <div class="form-floating m-3">
+      <a style="color:gray;">여행날짜</a>
+      <a th:text="${board.startday}" style="margin-bottom: 50px;"></a>
+      -
+      <a th:text="${board.lastday}" style="margin-bottom: 50px;"></a>
+    </div>
+    <hr/>
+
     <div class="form-floating m-3">
       <p th:text="${board.content}"></p>
     </div>
