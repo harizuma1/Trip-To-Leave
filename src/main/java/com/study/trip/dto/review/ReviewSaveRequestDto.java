@@ -1,6 +1,7 @@
-package com.study.trip.dto.board;
+package com.study.trip.dto.review;
 
 import com.study.trip.domain.board.Board;
+import com.study.trip.domain.review.Review;
 import com.study.trip.domain.user.User;
 
 import lombok.AllArgsConstructor;
@@ -12,35 +13,27 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardSaveRequestDto {
+public class ReviewSaveRequestDto {
 
 	private String title;
 	private String content;
 	private int count;
 	private User user;
-	private String startday;
-	private String lastday;
-	private int pnum;
 
-	private String city;
 
-	private String state;
-
-	public Board toEntity() {
-		return Board.builder()
+	public Review toEntity() {
+		return Review.builder()
 			.title(title)
 			.content(content)
 			.count(0)
 			.user(user)
-			.startday(startday)
-			.lastday(lastday)
-			.pnum(pnum)
-			.city(city)
-			.state(state)
 			.build();
 	}
 
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+
+
 }

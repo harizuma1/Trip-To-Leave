@@ -1,4 +1,4 @@
-package com.study.trip.domain.reply;
+package com.study.trip.domain.reviewReply;
 
 import com.study.trip.domain.BaseTimeEntity;
 import com.study.trip.domain.board.Board;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Reply extends BaseTimeEntity {
+public class ReviewReply extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,16 +32,16 @@ public class Reply extends BaseTimeEntity {
 	private String content;
 
 	@ManyToOne
-	@JoinColumn(name = "boardId")
-	private Board board;
+	@JoinColumn(name = "reviewId")
+	private Review review;
 
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 
-	public void save(Board board, User user) {
-		this.board = board;
+
+	public void save(Review review, User user) {
+		this.review = review;
 		this.user = user;
 	}
-
 }

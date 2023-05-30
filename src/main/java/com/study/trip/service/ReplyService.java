@@ -6,6 +6,8 @@ import com.study.trip.domain.board.Board;
 import com.study.trip.domain.board.BoardRepository;
 import com.study.trip.domain.reply.Reply;
 import com.study.trip.domain.reply.ReplyRepository;
+import com.study.trip.domain.review.Review;
+import com.study.trip.domain.review.ReviewRepository;
 import com.study.trip.domain.user.User;
 
 import jakarta.transaction.Transactional;

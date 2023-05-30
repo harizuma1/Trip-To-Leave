@@ -1,10 +1,12 @@
-package com.study.trip.domain.board;
+package com.study.trip.domain.review;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.study.trip.domain.BaseTimeEntity;
+import com.study.trip.domain.board.Board;
 import com.study.trip.domain.reply.Reply;
+import com.study.trip.domain.reviewReply.ReviewReply;
 import com.study.trip.domain.user.User;
 
 import jakarta.persistence.CascadeType;
@@ -12,10 +14,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
@@ -25,50 +25,38 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Builder
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Entity
-public class Board extends BaseTimeEntity {
+public class Review extends BaseTimeEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private Long id;
 
-	@Column(nullable = false, length = 100)
+	@Column
 	private String title;
 
-	@Lob
+	@Column
 	private String content;
 
 	@Column
-	private int count; //조회수
+	private int count;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
 	private User user;
-	private String startday;
-	private String lastday;
-	private int pnum;
 
-	@Column
-	private String city;
-
-	@Column
-	private String state;
-
-	public void update(String title, String content, String startday, String lastday, int punm, String city, String state) {
+	public void update(String title, String content) {
 		this.title = title;
 		this.content = content;
-		this.startday = startday;
-		this.lastday = lastday;
-		this.pnum = punm;
-		this.city=city;
-		this.state= state;
 	}
-	
+
 	@OrderBy("id desc")
-	@JsonIgnoreProperties({"board"})
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private List<Reply> replyList;
+	@JsonIgnoreProperties({"review"})
+	@OneToMany(mappedBy = "review", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private List<ReviewReply> reviewReplyList;
+
+
 }

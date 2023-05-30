@@ -1,26 +1,15 @@
 package com.study.trip.service;
 
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.google.gson.JsonParser;
 
-import com.google.gson.JsonElement;
 import com.study.trip.config.auth.PrincipalDetail;
 import com.study.trip.domain.user.User;
 import com.study.trip.domain.user.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service

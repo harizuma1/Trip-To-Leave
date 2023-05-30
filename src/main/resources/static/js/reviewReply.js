@@ -1,28 +1,28 @@
 'use strict';
 
-let replyIndex = {
+let reviewReplyIndex = {
     init: function () {
-        $("#reply-btn-save").on("click", () => {
-            this.replySave();
+        $("#reviewReply-btn-save").on("click", () => {
+            this.reviewReplySave();
         });
     },
 
-    replySave: function () {
+    reviewReplySave: function () {
         let data = {
-            content: $("#reply-content").val(),
+            content: $("#reviewReply-content").val(),
         }
-        let boardId = $("#boardId").val();
+        let reviewId = $("#reviewId").val();
         console.log(data);
-        console.log(boardId);
+        console.log(reviewId);
         $.ajax({
             type: "POST",
-            url: `/api/v1/board/${boardId}/reply`,
+            url: `/api/v1/review/${reviewId}/reviewReply`,
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "text"
         }).done(function (res) {
             alert("댓글작성이 완료되었습니다.");
-            location.href = `/board/${boardId}`;
+            location.href = `/review/${reviewId}`;
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -30,18 +30,18 @@ let replyIndex = {
 
 
 
-    replyDelete: function (boardId, replyId) {
+    reviewReplyDelete: function (reviewId, reviewReplyId) {
         $.ajax({
             type: "DELETE",
-            url: `/api/v1/board/${boardId}/reply/${replyId}`,
+            url: `/api/v1/review/${reviewId}/reviewReply/${reviewReplyId}`,
             dataType: "text"
         }).done(function (res) {
             alert("댓글삭제가 완료되었습니다.");
-            location.href = `/board/${boardId}`;
+            location.href = `/review/${reviewId}`;
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
     },
 
 }
-replyIndex.init();
+reviewReplyIndex.init();

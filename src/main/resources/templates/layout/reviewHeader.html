@@ -19,7 +19,7 @@
 
 <body>
 
-<header th:fragment="header">
+<header th:fragment="reviewHeader">
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
@@ -36,20 +36,18 @@
             <a sec:authorize="isAnonymous()" class="nav-link" href="/auth/user/save" >회원가입</a>
           </li>
           <li class="nav-item" style="float:right;">
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/board/save" >글쓰기</a>
+            <a sec:authorize="isAuthenticated()" class="nav-link" href="/" >동행 게시판</a>
           </li>
           <li class="nav-item" style="float:right;">
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/user/update">회원정보</a>
-          </li>
-          <li class="nav-item"  style="float:right;">
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/logout">로그아웃</a>
-          </li>
-          <li class="nav-item"  style="float:right;">
-            <a sec:authorize="isAuthenticated()" class="nav-link" href="/review/main">후기 게시판</a>
+            <a sec:authorize="isAuthenticated()" class="nav-link" href="/review/save" >후기 작성</a>
           </li>
           <li class="nav-item">
             <a sec:authorize="isAuthenticated()" class="nav-link" href="/user/mypage">마이페이지</a>
           </li>
+          <li class="nav-item"  style="float:right;">
+            <a sec:authorize="isAuthenticated()" class="nav-link" href="/logout">로그아웃</a>
+          </li>
+
         </ul>
 
       </div>
