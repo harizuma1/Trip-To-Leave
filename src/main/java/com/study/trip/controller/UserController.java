@@ -40,6 +40,12 @@ public class UserController {
 		return "layout/user/user-update";
 	}
 
+	@GetMapping("/user/information")
+	public String userInformation(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+		model.addAttribute("principal", principalDetail.getUser());
+		return "layout/user/user-information";
+	}
+
 	// @GetMapping("/auth/kakao/callback")
 	// public @ResponseBody String kakaoCallback(String code, HttpServletResponse response) { // Data를 리턴해주는 컨트롤러 함수
 	//
@@ -154,7 +160,7 @@ public class UserController {
 	//
 	// }
 
-	@GetMapping("/user/mypage")
+	@GetMapping({"/user", "/user/mypage"})
 	public String myPage() {
 		return "layout/user/myPage/myPage-main";
 	}

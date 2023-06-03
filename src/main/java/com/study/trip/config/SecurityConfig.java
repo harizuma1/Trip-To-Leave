@@ -56,6 +56,8 @@ public class SecurityConfig {
 			.userInfoEndpoint()
 			.userService(principalOauth2UserService);
 
+		http.headers().frameOptions().sameOrigin();
+
 		return http.build();
 	}
 

@@ -57,7 +57,7 @@ let index = {
             dataType: "json"
         }).done(function (res) {
             alert("회원수정이 완료되었습니다.");
-            location.href = "/";
+            location.href = "user/update";
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
