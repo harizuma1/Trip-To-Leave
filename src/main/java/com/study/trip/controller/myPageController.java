@@ -26,7 +26,7 @@ public class myPageController {
 	@GetMapping("/user/mypage/mypost")
 	public String mypost(Model model,
 		@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
-		@AuthenticationPrincipal PrincipalDetail principalDetail){
+		@AuthenticationPrincipal PrincipalDetail principalDetail) {
 		Page<Board> boards = boardService.findByUser_Id(principalDetail.getId(), pageable);
 		int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
 		int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);

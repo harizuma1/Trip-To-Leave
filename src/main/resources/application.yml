@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: root
+    username: Park
+    password: 1125
 
   jpa:
     open-in-view: true
@@ -16,6 +16,11 @@ spring:
 
   thymeleaf:
     cache: false
+    prefix=classpath: templates/
+    suffix: .html
+    check-template-location: true
+    mvc:
+      static-path-pattern: "/static/**"
 
   profiles:
     include: oauth
@@ -23,9 +28,13 @@ spring:
   devtools:
     livereload:
       enabled: true
+  security:
+    headers:
+      frame: true
 
 cos:
   key: root
+
 
 
 
